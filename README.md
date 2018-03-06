@@ -25,4 +25,4 @@ If you only have the one group, you needn't name it:
 
 ### Group_Vars
 
-
+The `group_vars` directory contains subdirectories for each group (those from the `inventory`). These subdirectories contain YAML files defining variables which will be applied to all hosts in the given group. For example, you might want to point all your Kibana instances at the same set of ElasticSearch instances, so the `group_vars` is where you might place the `es_list` vairable to be passed to the Kibana hosts.

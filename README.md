@@ -23,6 +23,8 @@ If you only have the one group, you needn't name it:
 127.0.0.1
 ```
 
+You can have different inventory files for different environments (e.g. `staging` and `production` inventories).
+
 ### Group_Vars
 
 The `group_vars` directory contains subdirectories for each group (those from the `inventory`). These subdirectories contain YAML files defining variables which will be applied to all hosts in the given group. For example, you might want to point all your Kibana instances at the same set of ElasticSearch instances, so the `group_vars` is where you might place the `es_list` vairable to be passed to the Kibana hosts. It is good practice to split your variables into files based on the prupose of the variables. For example, if you have some variables relating to the installation of Kibana (e.g. installation directory), you would put these in a separate file (still in `group_vars/kibana`) from the variables related to configuring Kibana itself.
@@ -30,6 +32,10 @@ The `group_vars` directory contains subdirectories for each group (those from th
 ### Host_Vars
 
 This directory houses files named according to the host on which they will be used. These files contain variables specific to the host in question (perhaps security setup, for example). Note that the files do *not* have `.yml` extensions! Also note that not every host has to have a file here.
+
+### Library
+
+If you have custom modules used in multiple roles, then put them here. If you have a custom module which is used only by one role, then put it in the `roles/role/library` directory.
 
 ### Roles
 
@@ -55,8 +61,22 @@ This is where you define listeners; these are operations which are executed when
 
 This directory stores any raw files which need to be sent to the host(s). For example, it might store the ElasticSearch tarball so that it can be uploaded to the host rather than the host having to download it from the Web.
 
+#### Roles/Role/Meta
+
+This directory stores dependencies for the given role.
+
+#### Roles/Role/Defaults
+
+This houses default values for variables (this is where you might store variables whose values will rarely be changed from the defaults).
+
+#### Roles/Role/Library
+
+This is where you put any custom modules specific to this role.
+
 ### Summary
 
 If you adhere to this structure and format, then a lot of work will be taken care of for you by Ansible. Ansible will look for certain files in the places defined in the best practices, and by following those practices you are not only saving yourself a lot of effort (there will be far less explicit inclusion of files), but will make it a lot simpler to extend your Ansible project. 
+
+For more information on other best practices, and some aspects of directory structure that I have purposely omitted here (namely `*_plugins` and `module_utils` directories), please see [the official documentation.](http://docs.ansible.com/ansible/latest/playbooks_best_practices.html#directory-layout) 
 
 I hope this is helpful, and thanks for reading!

@@ -1,5 +1,5 @@
 # ansible-template
-A template structure for Ansible projects
+A template structure for Ansible projects, adhering to [best practices](http://docs.ansible.com/ansible/latest/playbooks_best_practices.html#directory-layout)
 
 ## How to Use
 
@@ -22,3 +22,7 @@ If you only have the one group, you needn't name it:
 ```
 127.0.0.1
 ```
+
+### Group_Vars
+
+
